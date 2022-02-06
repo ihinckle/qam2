@@ -1,0 +1,8 @@
+com/spokostudios/App.class
+com/spokostudios/viewcontrollers/DashboardController.class
+com/spokostudios/viewcontrollers/LoginController.class
+com/spokostudios/PrimaryController.class
+module-info.class
+com/spokostudios/SecondaryController.class
+com/spokostudios/services/DBService.class
+com/spokostudios/services/LocalizationService.class

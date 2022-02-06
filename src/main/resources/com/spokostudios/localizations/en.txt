@@ -1,0 +1,4 @@
+login.loginButton=Login
+login.passwordLabel=Password
+login.regionLabel=Region
+login.userLabel=User
