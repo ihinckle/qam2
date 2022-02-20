@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.spokostudios.views.CustomersController">
+   <children>
+      <TableView fx:id="customersTable" prefHeight="581.0" prefWidth="900.0">
+        <columns>
+            <TableColumn prefWidth="50.0" text="ID">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Customer Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Address">
+                <cellValueFactory>
+                    <PropertyValueFactory property="address" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Division">
+                <cellValueFactory>
+                    <PropertyValueFactory property="division" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Country">
+                <cellValueFactory>
+                    <PropertyValueFactory property="country" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Postal Code">
+                <cellValueFactory>
+                    <PropertyValueFactory property="postalCode" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Phone">
+                <cellValueFactory>
+                    <PropertyValueFactory property="phone" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="125.0" text="Actions">
+                
+            </TableColumn>
+        </columns>
+      </TableView>
+      <HBox prefHeight="86.0" prefWidth="900.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Name" />
+                  <TextField fx:id="nameField" />
+                  <Label text="Address" />
+                  <TextField fx:id="addressField" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Postal Code" />
+                  <TextField fx:id="postalField" />
+                  <Label text="Phone" />
+                  <TextField fx:id="phoneField" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label text="Country" />
+                  <ChoiceBox fx:id="countryDropdown" prefHeight="24.0" prefWidth="300.0" />
+                  <Label text="Division" />
+                  <ChoiceBox fx:id="divisionDropdown" prefHeight="24.0" prefWidth="300.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addCustomerBtnClick" text="Add Customer" />
+            <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateCustomerBtnClick" text="Update" visible="false" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteCustomerBtnClick" text="Delete" visible="false" />
+            <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearBtnClick" text="Clear Selection" visible="false" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

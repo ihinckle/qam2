@@ -1,4 +1,4 @@
-package com.spokostudios.viewcontrollers;
+package com.spokostudios.views;
 
 import com.spokostudios.App;
 import com.spokostudios.services.DBService;
@@ -58,7 +58,7 @@ public class LoginController {
 			dbs = DBService.getInstance();
 		}catch(SQLException e){
 			errorBox.setVisible(true);
-			errorText.setText("Failed to connect to database.");
+			errorText.setText("Failed to connect to database. Please contact a system administrator.");
 		}
 
 		String user = userField.getText();
@@ -80,7 +80,7 @@ public class LoginController {
 			App.setRoot("dashboard");
 		}catch(IOException e){
 			errorBox.setVisible(true);
-			errorText.setText("Failed to query the database. Please contact a system administrator.");
+			errorText.setText("Application error. Please contact a system administrator.");
 		}
 	}
 
