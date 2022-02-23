@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 
 public class DashboardController {
-	@FXML private Button customerButton;
 	@FXML private SubScene viewPane;
 
 	@FXML
@@ -23,6 +22,9 @@ public class DashboardController {
 		switch (id){
 			case "customersButton":
 				template = "customers";
+				break;
+			case "appointmentsButton":
+				template = "appointments";
 				break;
 		}
 

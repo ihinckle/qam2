@@ -6,11 +6,12 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.spokostudios.views.DashboardController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.spokostudios.views.DashboardController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <VBox prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="customersButton" mnemonicParsing="false" onAction="#navigate" prefHeight="24.0" prefWidth="209.0" text="Customers" />
+            <Button fx:id="customersButton" mnemonicParsing="false" onAction="#navigate" prefHeight="24.0" prefWidth="200.0" text="Customers" />
+            <Button fx:id="appointmentsButton" mnemonicParsing="false" onAction="#navigate" prefHeight="24.0" prefWidth="200.0" text="Appointments" />
          </children>
       </VBox>
       <SubScene fx:id="viewPane" height="600.0" width="900.0">

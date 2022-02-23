@@ -14,7 +14,7 @@ public class LocalizationService {
 	private LocalizationService(){
 		locale = Locale.getDefault();
 
-		String localizationPath = String.format("/com/spokostudios/localizations/%s.txt", locale.getLanguage());
+		String localizationPath = String.format("/com/spokostudios/localizations/%s.properties", locale.getLanguage());
 		InputStream is = this.getClass().getResourceAsStream(localizationPath);
 
 		if(is == null){

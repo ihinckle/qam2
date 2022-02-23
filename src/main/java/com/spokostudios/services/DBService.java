@@ -1,5 +1,6 @@
 package com.spokostudios.services;
 
+import com.spokostudios.entities.Appointment;
 import com.spokostudios.entities.Country;
 import com.spokostudios.entities.Customer;
 import com.spokostudios.entities.Division;
@@ -11,19 +12,25 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class DBService {
 	private static DBService DBServiceInstance;
 	private static Connection connection;
 
 	private static final String LOGINSTATEMENT = "SELECT COUNT(*) FROM users WHERE User_Name = ? AND Password = ?";
+	private static final String COUNTRIESSTATEMENT = "SELECT Country_ID, Country FROM countries";
+
+	private static final String DIVISIONSSTATEMENT = "SELECT Division_ID, Division, COUNTRY_ID FROM first_level_divisions";
+	private static final String DIVISIONIDSTATEMENT = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+
 	private static final String GETCUSTOMERSSTATEMENT = "SELECT customers.Customer_ID,customers.Customer_Name,customers.Address,customers.Postal_Code,customers.Phone,first_level_divisions.Division,c.Country FROM customers INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID INNER JOIN countries c on first_level_divisions.COUNTRY_ID = c.Country_ID";
 	private static final String ADDCUSTOMERSTATEMENT = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
 	private static final String UPDATECUSTOMERSTATEMENT = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
 	private static final String DELETECUSTOMERSTATEMENT = "DELETE FROM customers where Customer_ID = ?";
-	private static final String COUNTRIESSTATEMENT = "SELECT Country_ID, Country FROM countries";
-	private static final String DIVISIONSSTATEMENT = "SELECT Division_ID, Division, COUNTRY_ID FROM first_level_divisions";
-	private static final String DIVISIONIDSTATEMENT = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
+
+	private static final String GETAPPOINTMENTSSTATEMENT = "SELECT Appointment_ID,Title,Description,Location,Contact_Name,Type,Start,End,Customer_ID,User_ID FROM appointments INNER JOIN contacts ON appointments.Contact_ID = contacts.Contact_ID";
 
 	private DBService() throws SQLException {
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/client_schedule", "sqlUser", "Passw0rd!");
@@ -141,5 +148,30 @@ public class DBService {
 		}
 
 		return divisions;
+	}
+
+	public ObservableList<Appointment> getAppointments() throws SQLException {
+		PreparedStatement statement = connection.prepareStatement(GETAPPOINTMENTSSTATEMENT);
+		ResultSet rs = statement.executeQuery();
+
+		ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+		while(rs.next()){
+			ZonedDateTime start = ZonedDateTime.ofInstant(rs.getDate("Start").toInstant(), ZoneId.systemDefault());
+			ZonedDateTime end = ZonedDateTime.ofInstant(rs.getDate("End").toInstant(), ZoneId.systemDefault());
+
+			Appointment appointment = new Appointment(rs.getInt("Appointment_ID"),
+													  rs.getString("Title"),
+													  rs.getString("Description"),
+													  rs.getString("Location"),
+													  rs.getString("Contact_Name"),
+													  rs.getString("Type"),
+													  start,
+													  end,
+													  rs.getInt("Customer_ID"),
+													  rs.getInt("User_ID"));
+		}
+
+		return appointments;
 	}
 }

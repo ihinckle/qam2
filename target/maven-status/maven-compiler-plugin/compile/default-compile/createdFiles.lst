@@ -1,8 +1,10 @@
 com/spokostudios/App.class
+com/spokostudios/views/AppointmentsController.class
 com/spokostudios/views/CustomersController.class
 com/spokostudios/views/DashboardController.class
 com/spokostudios/PrimaryController.class
 com/spokostudios/entities/Customer.class
+com/spokostudios/entities/Appointment.class
 module-info.class
 com/spokostudios/SecondaryController.class
 com/spokostudios/views/LoginController.class
