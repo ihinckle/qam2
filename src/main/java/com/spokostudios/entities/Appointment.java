@@ -54,6 +54,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment ID
      * @return The appointment ID
      */
     public int getId() {
@@ -61,6 +62,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment title
      * @return The appointment title
      */
     public String getTitle() {
@@ -68,6 +70,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment description
      * @return The appointment description
      */
     public String getDescription() {
@@ -75,6 +78,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment location
      * @return The appointment location
      */
     public String getLocation() {
@@ -82,6 +86,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment contact
      * @return The contact on the appointment
      */
     public Contact getContact() {
@@ -89,6 +94,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment type
      * @return The appointment type
      */
     public String getType() {
@@ -96,6 +102,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the appointment start time in UTC
      * @return The start time in UTC
      */
     public ZonedDateTime getStartInUTC() {
@@ -103,6 +110,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the start time as a TimeOption
      * @return The start time represented as a TimeOption
      */
     public TimeOption getStartTimeOption(){
@@ -110,6 +118,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the end time in UTC
      * @return The end time in UTC
      */
     public ZonedDateTime getEndInUTC() {
@@ -117,6 +126,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the end time as a TimeOption
      * @return The end time represented as a TimeOption
      */
     public TimeOption getEndTimeOption(){
@@ -124,6 +134,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the customer on the appointment
      * @return The customer on the appointment
      */
     public Customer getCustomer() {
@@ -131,6 +142,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the ID of the customer on the appointment
      * @return The ID of the customer on the appointment
      */
     public int getCustomerId() {
@@ -138,6 +150,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the user on the appointment
      * @return The user on the appointment
      */
     public User getUser() {
@@ -153,6 +166,7 @@ public class Appointment {
     }
 
     /**
+     * Gets the date of the appointment
      * @return The date of the appointment
      */
     public LocalDate getDate(){

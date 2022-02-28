@@ -1,0 +1,6 @@
+module:com.spokostudios
+com.spokostudios
+com.spokostudios.entities
+com.spokostudios.services
+com.spokostudios.services.dbservice
+com.spokostudios.views

@@ -42,6 +42,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the customer ID
 	 * @return The customer ID
 	 */
 	public int getId() {
@@ -49,6 +50,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the customer name
 	 * @return The customer name
 	 */
 	public String getName() {
@@ -56,6 +58,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the customer address
 	 * @return The customer address
 	 */
 	public String getAddress() {
@@ -63,6 +66,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the customer postal code
 	 * @return The customer postal code
 	 */
 	public String getPostalCode() {
@@ -70,6 +74,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the customer phone number
 	 * @return The customer phone number
 	 */
 	public String getPhone() {
@@ -77,6 +82,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the local area that the customer lives in
 	 * @return The local area the customer lives in
 	 */
 	public String getDivision() {
@@ -84,6 +90,7 @@ public class Customer {
 	}
 
 	/**
+	 * Gets the country that the customer lives in
 	 * @return The country the customer lives in
 	 */
 	public String getCountry() {
@@ -91,6 +98,7 @@ public class Customer {
 	}
 
 	/**
+	 * Returns the customers ID and name
 	 * @return The customer's ID and the customer's name
 	 */
 	public String toString(){

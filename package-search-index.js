@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.spokostudios","l":"com.spokostudios"},{"m":"com.spokostudios","l":"com.spokostudios.entities"},{"m":"com.spokostudios","l":"com.spokostudios.services"},{"m":"com.spokostudios","l":"com.spokostudios.services.dbservice"},{"m":"com.spokostudios","l":"com.spokostudios.views"}];updateSearchResults();

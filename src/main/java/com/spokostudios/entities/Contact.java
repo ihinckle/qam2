@@ -15,6 +15,7 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the contact ID
 	 * @return The contact ID
 	 */
 	public int getId() {
@@ -22,6 +23,7 @@ public class Contact {
 	}
 
 	/**
+	 * Gets the contact name
 	 * @return The contact name
 	 */
 	public String getName(){
@@ -29,6 +31,7 @@ public class Contact {
 	}
 
 	/**
+	 * Returns the contact name
 	 * @return The contact name
 	 */
 	public String toString(){

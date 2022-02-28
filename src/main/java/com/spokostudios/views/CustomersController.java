@@ -235,6 +235,8 @@ public class CustomersController {
 	private void reset(){
 		populateTable();
 
+		selectedCustomer = null;
+
 		idLabel.setText("ID: ");
 		nameField.setText(null);
 		addressField.setText(null);

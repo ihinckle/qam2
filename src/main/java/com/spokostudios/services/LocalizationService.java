@@ -55,6 +55,7 @@ public class LocalizationService {
 	}
 
 	/**
+	 * Get the instance
 	 * @return The instance of this service
 	 * @throws Exception
 	 */

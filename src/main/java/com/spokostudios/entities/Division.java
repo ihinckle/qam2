@@ -17,6 +17,7 @@ public class Division {
 	}
 
 	/**
+	 * Gets the division ID
 	 * @return The division ID
 	 */
 	public int getId() {
@@ -24,6 +25,7 @@ public class Division {
 	}
 
 	/**
+	 * Gets the division name
 	 * @return The division name
 	 */
 	public String getName() {
@@ -31,6 +33,7 @@ public class Division {
 	}
 
 	/**
+	 * Gets the country ID that the division belongs to
 	 * @return The ID of the country the division resides in
 	 */
 	public int getCountryId() {
@@ -51,6 +54,7 @@ public class Division {
 	}
 
 	/**
+	 * Returns the division name
 	 * @return The division name
 	 */
 	@Override

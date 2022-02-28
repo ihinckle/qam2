@@ -81,6 +81,7 @@ public class AppointmentsController {
     @FXML private Label contactLabel;
     @FXML private Label customerLabel;
     @FXML private Label userLabel;
+    @FXML private Label idLabel;
 
     private Appointment selectedAppointment;
     private LocalDateTime month;
@@ -295,6 +296,7 @@ public class AppointmentsController {
                     return;
                 }
 
+                idLabel.setText("ID: "+selectedAppointment.getId());
                 titleField.setText(selectedAppointment.getTitle());
                 descriptionField.setText(selectedAppointment.getDescription());
                 locationField.setText(selectedAppointment.getLocation());
@@ -388,10 +390,7 @@ public class AppointmentsController {
             ComboBox<TimeOption> source = (ComboBox) event.getSource();
             TimeOption option = source.getValue();
 
-            if(option == null){
-                endTimeField.setItems(null);
-                return;
-            }
+            endTimeField.setItems(null);
 
             int timeInt = option.getTimeInt();
             ObservableList<TimeOption> endTimes = FXCollections.observableArrayList();
@@ -426,6 +425,9 @@ public class AppointmentsController {
      * that has been selected.
      */
     private void reset(){
+        selectedAppointment = null;
+
+        idLabel.setText("ID: ");
         titleField.setText(null);
         descriptionField.setText(null);
         locationField.setText(null);

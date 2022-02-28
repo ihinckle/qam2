@@ -13,6 +13,7 @@ public class User {
 	}
 
 	/**
+	 * Gets the user ID
 	 * @return The user ID
 	 */
 	public int getId() {
@@ -20,6 +21,7 @@ public class User {
 	}
 
 	/**
+	 * Returns the username
 	 * @return The userame
 	 */
 	public String toString(){

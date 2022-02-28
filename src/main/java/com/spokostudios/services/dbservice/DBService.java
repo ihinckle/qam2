@@ -50,6 +50,7 @@ public class DBService {
 	}
 
 	/**
+	 * Get the instance
 	 * @return The instance of this service
 	 * @throws SQLException
 	 */

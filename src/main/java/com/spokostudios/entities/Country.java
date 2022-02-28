@@ -15,6 +15,7 @@ public class Country {
 	}
 
 	/**
+	 * Gets the country ID
 	 * @return The country ID
 	 */
 	public int getId() {
@@ -22,6 +23,7 @@ public class Country {
 	}
 
 	/**
+	 * Gets the country name
 	 * @return The country name
 	 */
 	public String getName() {
@@ -39,6 +41,7 @@ public class Country {
 	}
 
 	/**
+	 * Returns the country name
 	 * @return The country name
 	 */
 	@Override

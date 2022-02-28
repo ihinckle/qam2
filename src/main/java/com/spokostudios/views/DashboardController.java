@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -25,7 +26,7 @@ public class DashboardController {
 	@FXML private Button reportsButton;
 	@FXML private Button errorButton;
 	@FXML private VBox errorBox;
-	@FXML private Label errorLabel;
+	@FXML private TextArea errorLabel;
 
 	@FXML
 	private void initialize(){

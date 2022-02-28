@@ -32,6 +32,7 @@ public class TimeOption {
 	}
 
 	/**
+	 * Gets the integer used to generate the TimeOption
 	 * @return The integer used to generate the TimeOption
 	 */
 	public int getTimeInt(){
@@ -39,6 +40,7 @@ public class TimeOption {
 	}
 
 	/**
+	 * Gets the TimeOption in UTC
 	 * @return The TimeOption in UTC
 	 */
 	public OffsetTime getTimeInUTC() {
@@ -46,6 +48,7 @@ public class TimeOption {
 	}
 
 	/**
+	 * Returns the TimeOption in local time
 	 * @return The TimeOption in local time
 	 */
 	public String toString(){

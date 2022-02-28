@@ -15,6 +15,7 @@ public class ViewsService {
 	private static ViewsService instance;
 
 	/**
+	 * Get the instance
 	 * @return The instance of this service
 	 */
 	public static ViewsService getInstance(){
