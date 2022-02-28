@@ -12,6 +12,9 @@ import java.time.format.FormatStyle;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * A class for translations of language and time
+ */
 public class LocalizationService {
 	private static LocalizationService localizationInstance = null;
 
@@ -19,11 +22,10 @@ public class LocalizationService {
 
 	private static Locale locale = null;
 	private static HashMap<String, String> textsMap = new HashMap<>();
-	private boolean shouldUseDefaults = false;
 
 	private static ZoneId zoneId;
 
-	private LocalizationService(){
+	private LocalizationService() throws Exception {
 		locale = Locale.getDefault();
 		zoneId = ZoneId.systemDefault();
 
@@ -31,13 +33,20 @@ public class LocalizationService {
 		InputStream is = this.getClass().getResourceAsStream(localizationPath);
 
 		if(is == null){
-			shouldUseDefaults = true;
-			return;
+			localizationPath = String.format("/com/spokostudios/localizations/%s.properties", locale.getLanguage());
+			is = this.getClass().getResourceAsStream(localizationPath);
+		}
+
+		if(is == null){
+			throw new Exception("Please have at least an english localization file.");
 		}
 
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
 
+		/**
+		 * Honestly because who wouldn't use a lambda with a forEach (unless it got completely complicated)
+		 */
 		br.lines().forEach(line -> {
 			String[] keyValuePair = line.split("=");
 
@@ -45,7 +54,11 @@ public class LocalizationService {
 		});
 	}
 
-	public static LocalizationService getInstance(){
+	/**
+	 * @return The instance of this service
+	 * @throws Exception
+	 */
+	public static LocalizationService getInstance() throws Exception {
 		if(localizationInstance == null){
 			localizationInstance = new LocalizationService();
 		}
@@ -53,26 +66,44 @@ public class LocalizationService {
 		return localizationInstance;
 	}
 
+	/**
+	 * Gets the locale of the machine
+	 * @return The locale
+	 */
 	public static Locale getLocale(){
 		return locale;
 	}
 
+	/**
+	 * Gets the zone ID for time conversions
+	 * @return The zone ID
+	 */
 	public static ZoneId getZoneId(){
 		return zoneId;
 	}
 
+	/**
+	 * Gets the numerical time offset of the zone ID
+	 * @return The numberical time offset
+	 */
 	public static ZoneOffset getZoneOffset(){
 		return zoneId.getRules().getOffset(Instant.now());
 	}
 
+	/**
+	 * Gets the localized text for a particular lookup
+	 * @param key The lookup key in the properties file
+	 * @return The test to display
+	 */
 	public static String getText(String key){
 		return textsMap.get(key);
 	}
 
-	public Boolean useDefaults(){
-		return shouldUseDefaults;
-	}
-
+	/**
+	 * Formats a UTC time into the local time
+	 * @param dateTimeUTC The UTC date and time to format
+	 * @return The text to display
+	 */
 	public String formattedDateFromUTC(ZonedDateTime dateTimeUTC){
 		ZonedDateTime date = dateTimeUTC.withZoneSameInstant(getZoneId());
 		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.LONG);
@@ -80,6 +111,10 @@ public class LocalizationService {
 		return formattedDate;
 	}
 
+	/**
+	 * Returns the time offset for the home office
+	 * @return The home office time offset
+	 */
 	public static ZoneOffset getHomeOfficeOffset(){
 		return homeOfficeZone.getRules().getOffset(Instant.now());
 	}

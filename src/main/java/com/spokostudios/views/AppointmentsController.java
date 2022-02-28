@@ -27,6 +27,7 @@ import java.time.ZonedDateTime;
 public class AppointmentsController {
     private DBService dbs;
     private LocalizationService ls;
+    private DashboardController dashboardController = DashboardController.getInstance();
 
     @FXML private TableView<Appointment> weekTable;
     @FXML private TableView<Appointment> monthTable;
@@ -50,14 +51,83 @@ public class AppointmentsController {
     @FXML private Button clearButton;
     @FXML private TextField monthLabel;
     @FXML private TextField weekLabel;
+    @FXML private Tab weekTab;
+    @FXML private Tab monthTab;
+    @FXML private Button previousWeekButton;
+    @FXML private Button previousMonthButton;
+    @FXML private Button nextWeekButton;
+    @FXML private Button nextMonthButton;
+    @FXML private TableColumn<Appointment, String> weekTitleColumn;
+    @FXML private TableColumn<Appointment, String> weekDescriptionColumn;
+    @FXML private TableColumn<Appointment, String> weekLocationColumn;
+    @FXML private TableColumn<Appointment, String> weekContactColumn;
+    @FXML private TableColumn<Appointment, String> weekTypeColumn;
+    @FXML private TableColumn<Appointment, String> weekCustomerColumn;
+    @FXML private TableColumn<Appointment, String> weekUserColumn;
+    @FXML private TableColumn<Appointment, String> monthTitleColumn;
+    @FXML private TableColumn<Appointment, String> monthDescriptionColumn;
+    @FXML private TableColumn<Appointment, String> monthLocationColumn;
+    @FXML private TableColumn<Appointment, String> monthContactColumn;
+    @FXML private TableColumn<Appointment, String> monthTypeColumn;
+    @FXML private TableColumn<Appointment, String> monthCustomerColumn;
+    @FXML private TableColumn<Appointment, String> monthUserColumn;
+    @FXML private Label titleLabel;
+    @FXML private Label descriptionLabel;
+    @FXML private Label locationLabel;
+    @FXML private Label dateLabel;
+    @FXML private Label typeLabel;
+    @FXML private Label startLabel;
+    @FXML private Label endLabel;
+    @FXML private Label contactLabel;
+    @FXML private Label customerLabel;
+    @FXML private Label userLabel;
 
     private Appointment selectedAppointment;
     private LocalDateTime month;
     private LocalDateTime week;
 
     @FXML
-    private void initialize() throws SQLException {
+    private void initialize(){
         setServices();
+
+        weekTab.setText(ls.getText("appointments.weekTab"));
+        monthTab.setText(ls.getText("appointments.monthTab"));
+        previousWeekButton.setText(ls.getText("appointments.previousButton"));
+        previousMonthButton.setText(ls.getText("appointments.previousButton"));
+        nextWeekButton.setText(ls.getText("appointments.nextButton"));
+        nextMonthButton.setText(ls.getText("appointments.nextButton"));
+        weekTitleColumn.setText(ls.getText("appointments.title"));
+        weekDescriptionColumn.setText(ls.getText("appointments.description"));
+        weekLocationColumn.setText(ls.getText("appointments.location"));
+        weekContactColumn.setText(ls.getText("appointments.contact"));
+        weekTypeColumn.setText(ls.getText("appointments.type"));
+        weekStartColumn.setText(ls.getText("appointments.start"));
+        weekEndColumn.setText(ls.getText("appointments.end"));
+        weekCustomerColumn.setText(ls.getText("appointments.customer")+" ID");
+        weekUserColumn.setText(ls.getText("appointments.user")+" ID");
+        monthTitleColumn.setText(ls.getText("appointments.title"));
+        monthDescriptionColumn.setText(ls.getText("appointments.description"));
+        monthLocationColumn.setText(ls.getText("appointments.location"));
+        monthContactColumn.setText(ls.getText("appointments.contact"));
+        monthTypeColumn.setText(ls.getText("appointments.type"));
+        monthStartColumn.setText(ls.getText("appointments.start"));
+        monthEndColumn.setText(ls.getText("appointments.end"));
+        monthCustomerColumn.setText(ls.getText("appointments.customer")+" ID");
+        monthUserColumn.setText(ls.getText("appointments.user")+" ID");
+        titleLabel.setText(ls.getText("appointments.title"));
+        descriptionLabel.setText(ls.getText("appointments.description"));
+        locationLabel.setText(ls.getText("appointments.location"));
+        contactLabel.setText(ls.getText("appointments.contact"));
+        typeLabel.setText(ls.getText("appointments.type"));
+        startLabel.setText(ls.getText("appointments.start"));
+        endLabel.setText(ls.getText("appointments.end"));
+        customerLabel.setText(ls.getText("appointments.customer"));
+        userLabel.setText(ls.getText("appointments.user"));
+        dateLabel.setText(ls.getText("appointments.date"));
+        createButton.setText("create");
+        updateButton.setText("update");
+        deleteButton.setText("delete");
+        clearButton.setText("clear");
 
         month = LocalDateTime.now();
         String monthText = String.valueOf(month.getYear())+"-"+month.getMonth().toString();
@@ -68,10 +138,25 @@ public class AppointmentsController {
         String weekText = week.getMonth().toString()+"/"+String.valueOf(week.getDayOfMonth())+"-"+weeksEnd.getMonth().toString()+"/"+String.valueOf(weeksEnd.getDayOfMonth());
         weekLabel.setText(weekText);
 
-        populateTables(month);
-        customerField.setItems(dbs.getCustomers());
-        contactField.setItems(dbs.getContacts());
-        userField.setItems(dbs.getUsers());
+        populateTables();
+        try {
+            customerField.setItems(dbs.getCustomers());
+        } catch (SQLException e) {
+            dashboardController.displayError("customers.failedCustomers");
+            e.printStackTrace();
+        }
+        try {
+            contactField.setItems(dbs.getContacts());
+        } catch (SQLException e) {
+            dashboardController.displayError("appointments.contactsFailed");
+            e.printStackTrace();
+        }
+        try {
+            userField.setItems(dbs.getUsers());
+        } catch (SQLException e) {
+            dashboardController.displayError("appointments.UsersFailed");
+            e.printStackTrace();
+        }
 
         setTableRow();
 
@@ -80,8 +165,11 @@ public class AppointmentsController {
         setTimeOptions();
     }
 
+    /**
+     * Prepare the object and send it to the database service to create an appointment
+     */
     @FXML
-    private void create() throws Exception {
+    private void create(){
         LocalDate date = dateField.getValue();
         LocalTime startTime = startTimeField.getValue().getTimeInUTC().toLocalTime();
         LocalTime endTime = endTimeField.getValue().getTimeInUTC().toLocalTime();
@@ -99,29 +187,71 @@ public class AppointmentsController {
                 customerField.getValue(),
                 userField.getValue());
 
-        dbs.Appointments().create(appointment);
-
-        reset();
+        try{
+            dbs.Appointments().create(appointment);
+            reset();
+        }catch(SQLException e){
+            dashboardController.displayError("appointments.createFailed");
+        }catch(Exception e){
+            dashboardController.displayError("appointments.creationConflict");
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Prepare the object and send it to the database service to update and appointment
+     */
     @FXML
-    private void update() throws Exception {
-        dbs.Appointments().update(selectedAppointment);
+    private void update(){
+        LocalDate date = dateField.getValue();
+        LocalTime startTime = startTimeField.getValue().getTimeInUTC().toLocalTime();
+        LocalTime endTime = endTimeField.getValue().getTimeInUTC().toLocalTime();
 
-        reset();
+        ZonedDateTime start = ZonedDateTime.of(date, startTime, ZoneId.of("UTC"));
+        ZonedDateTime end = ZonedDateTime.of(date, endTime, ZoneId.of("UTC"));
+
+        Appointment appointment = new Appointment(selectedAppointment.getId(),
+                titleField.getText(),
+                descriptionField.getText(),
+                locationField.getText(),
+                contactField.getValue(),
+                typeField.getText(),
+                start,
+                end,
+                customerField.getValue(),
+                userField.getValue());
+
+        try {
+            dbs.Appointments().update(appointment);
+            clearSelection();
+        } catch (Exception e) {
+            dashboardController.displayError("appointments.updateFailed");
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Gets the ID of an appointment to delete and sends it to the database service
+     * Notifies the user after a successful deletion.
+     */
     @FXML
-    void delete() throws SQLException {
-        dbs.Appointments().delete(selectedAppointment.getId());
+    void delete(){
+        try {
+            dbs.Appointments().delete(selectedAppointment.getId());
+            clearSelection();
 
-        reset();
-
-        new Alert(Alert.AlertType.CONFIRMATION, "Deleted appointment ID:"+selectedAppointment.getId()+" Type: "+selectedAppointment.getType(), ButtonType.CLOSE).show();
+            new Alert(Alert.AlertType.CONFIRMATION, "Deleted appointment ID:"+selectedAppointment.getId()+" Type: "+selectedAppointment.getType(), ButtonType.CLOSE).show();
+        } catch (SQLException e) {
+            dashboardController.displayError("appointments.deleteFailed");
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Resets the add/update form and buttons
+     */
     @FXML
-    private void clearSelection() throws SQLException {
+    private void clearSelection(){
         createButton.setVisible(true);
         updateButton.setVisible(false);
         deleteButton.setVisible(false);
@@ -130,18 +260,40 @@ public class AppointmentsController {
         reset();
     }
 
-    private void setServices() throws SQLException {
-        dbs = DBService.getInstance();
-        ls = LocalizationService.getInstance();
+    /**
+     * Bootstraps the services to be used
+     */
+    private void setServices(){
+        try {
+            dbs = DBService.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            ls = LocalizationService.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Sets up the mouse click action on a row
+     */
     private void setTableRow(){
         weekTable.setRowFactory(weekTable -> {
             TableRow<Appointment> row = new TableRow<>();
 
+            /**
+             * I wanted to keep all the logic togther. It is already in its own method
+             * for singular purpose
+             */
             row.setOnMouseClicked((MouseEvent event) -> {
                 TableRow<Appointment> source = (TableRow<Appointment>) event.getSource();
                 selectedAppointment = source.getItem();
+
+                if(selectedAppointment == null){
+                    return;
+                }
 
                 titleField.setText(selectedAppointment.getTitle());
                 descriptionField.setText(selectedAppointment.getDescription());
@@ -164,7 +316,14 @@ public class AppointmentsController {
         });
     }
 
+    /**
+     * Sets up the Start and End table cells to have a custom string instead of
+     * the default ZonedDateTime.toString()
+     */
     private void setTableCells(){
+        /**
+         * These lambas remain because each one creates its own override.
+         */
         weekStartColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Appointment, String> appointment) {
@@ -174,6 +333,9 @@ public class AppointmentsController {
             }
         });
 
+        /**
+         * These lambas remain because each one creates its own override.
+         */
         weekEndColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Appointment, String> appointment) {
@@ -183,6 +345,9 @@ public class AppointmentsController {
             }
         });
 
+        /**
+         * These lambas remain because each one creates its own override.
+         */
         monthStartColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Appointment, String> appointment) {
@@ -192,6 +357,9 @@ public class AppointmentsController {
             }
         });
 
+        /**
+         * These lambas remain because each one creates its own override.
+         */
         monthEndColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Appointment, String> appointment) {
@@ -202,6 +370,10 @@ public class AppointmentsController {
         });
     }
 
+    /**
+     * Sets up the time selection in the form. Will not allow an end time
+     * to be selected until a start time has been chosen.
+     */
     private void setTimeOptions(){
         ObservableList<TimeOption> startTimes = FXCollections.observableArrayList();
         for(int i=8; i<17; i++){
@@ -209,6 +381,9 @@ public class AppointmentsController {
         }
         startTimeField.setItems(startTimes);
 
+        /**
+         * I do most event handlers as lambdas out of personal habit.
+         */
         startTimeField.setOnAction((ActionEvent event) -> {
             ComboBox<TimeOption> source = (ComboBox) event.getSource();
             TimeOption option = source.getValue();
@@ -227,12 +402,30 @@ public class AppointmentsController {
         });
     }
 
-    private void populateTables(LocalDateTime month) throws SQLException {
-        weekTable.setItems(dbs.Appointments().getWeek(week));
-        monthTable.setItems(dbs.Appointments().getMonth(month));
+    /**
+     * Populates the tables with data:
+     * on load, on create, on update, on delete, and on page change
+     */
+    private void populateTables(){
+        try {
+            weekTable.setItems(dbs.Appointments().getWeek(week));
+        } catch (SQLException e) {
+            dashboardController.displayError("appointments.weekFailed");
+            e.printStackTrace();
+        }
+        try {
+            monthTable.setItems(dbs.Appointments().getMonth(month));
+        } catch (SQLException e) {
+            dashboardController.displayError("appointments.monthFailed");
+            e.printStackTrace();
+        }
     }
 
-    private void reset() throws SQLException {
+    /**
+     * Resets the forms and tables. Will remain on whichever week or month
+     * that has been selected.
+     */
+    private void reset(){
         titleField.setText(null);
         descriptionField.setText(null);
         locationField.setText(null);
@@ -242,61 +435,50 @@ public class AppointmentsController {
         endTimeField.setValue(null);
         customerField.setValue(null);
         dateField.setValue(null);
+        userField.setValue(null);
 
-        populateTables(month);
+        populateTables();
     }
 
+    /**
+     * Move the table forward a month
+     */
     @FXML
-    private void nextMonth() throws SQLException {
+    private void nextMonth(){
         month = month.plusMonths(1);
         monthLabel.setText(String.valueOf(month.getYear())+"-"+month.getMonth().toString());
-        ObservableList<Appointment> appointments = dbs.Appointments().getMonth(month);
-        if(appointments.size() > 0) {
-            monthTable.setVisible(true);
-            monthTable.setItems(appointments);
-        }else{
-            monthTable.setVisible(false);
-        }
+        reset();
     }
 
+    /**
+     * Move the table backwards a month
+     */
     @FXML
-    private void previousMonth() throws SQLException {
+    private void previousMonth(){
         month = month.minusMonths(1);
         monthLabel.setText(String.valueOf(month.getYear())+"-"+month.getMonth().toString());
-        ObservableList<Appointment> appointments = dbs.Appointments().getMonth(month);
-        if(appointments.size() > 0) {
-            monthTable.setVisible(true);
-            monthTable.setItems(appointments);
-        }else {
-            monthTable.setVisible(false);
-        }
+        reset();
     }
 
+    /**
+     * Move the table up a week
+     */
     @FXML
-    private void nextWeek() throws SQLException {
+    private void nextWeek(){
         week = week.plusDays(7);
         LocalDateTime weeksEnd = week.plusDays(6);
         weekLabel.setText(week.getMonth().toString()+"/"+String.valueOf(week.getDayOfMonth())+"-"+weeksEnd.getMonth().toString()+"/"+String.valueOf(weeksEnd.getDayOfMonth()));
-        ObservableList<Appointment> appointments = dbs.Appointments().getWeek(week);
-        if(appointments.size() > 0) {
-            weekTable.setVisible(true);
-            weekTable.setItems(appointments);
-        }else{
-            weekTable.setVisible(false);
-        }
+        reset();
     }
 
+    /**
+     * Move the table back a week
+     */
     @FXML
-    private void previousWeek() throws SQLException {
+    private void previousWeek(){
         week = week.minusDays(7);
         LocalDateTime weeksEnd = week.plusDays(6);
         weekLabel.setText(week.getMonth().toString()+"/"+String.valueOf(week.getDayOfMonth())+"-"+weeksEnd.getMonth().toString()+"/"+String.valueOf(weeksEnd.getDayOfMonth()));
-        ObservableList<Appointment> appointments = dbs.Appointments().getWeek(week);
-        if(appointments.size() > 0) {
-            weekTable.setVisible(true);
-            weekTable.setItems(appointments);
-        }else{
-            weekTable.setVisible(false);
-        }
+        reset();
     }
 }

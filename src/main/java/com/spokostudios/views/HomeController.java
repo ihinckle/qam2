@@ -8,6 +8,11 @@ import javafx.scene.control.Label;
 
 import java.sql.SQLException;
 
+/**
+ * I got carried away with this controller. It was supposed to have
+ * everying in the reports view as well, but it became easier to give
+ * the reports their own page
+ */
 public class HomeController {
 	private DBService dbs;
 	private LocalizationService ls;
@@ -15,16 +20,32 @@ public class HomeController {
 	@FXML private Label appointmentNotice;
 
 	@FXML
-	private void initialize() throws SQLException {
-		dbs = DBService.getInstance();
-		ls = LocalizationService.getInstance();
+	private void initialize(){
+		try {
+			dbs = DBService.getInstance();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			ls = LocalizationService.getInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		Appointment upcomingAppointment = dbs.Appointments().getUpcoming();
+		DashboardController dashboardController = DashboardController.getInstance();
+
+		Appointment upcomingAppointment = null;
+		try {
+			upcomingAppointment = dbs.Appointments().getUpcoming();
+		} catch (SQLException e) {
+			dashboardController.displayError("home.failedUpcoming");
+			e.printStackTrace();
+		}
 
 		if(upcomingAppointment != null){
-			appointmentNotice.setText("Upcoming appointment: ID-"+upcomingAppointment.getId()+" Start-"+ls.formattedDateFromUTC(upcomingAppointment.getStartInUTC())+".");
+			appointmentNotice.setText(String.format(ls.getText("home.upcomingAppointment"), upcomingAppointment.getId(), ls.formattedDateFromUTC(upcomingAppointment.getStartInUTC())));
 		}else{
-			appointmentNotice.setText("No upcoming appointments.");
+			appointmentNotice.setText(ls.getText("home.noUpcoming"));
 		}
 	}
 }

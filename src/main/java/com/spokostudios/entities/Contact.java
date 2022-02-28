@@ -1,5 +1,8 @@
 package com.spokostudios.entities;
 
+/**
+ * A contact object
+ */
 public class Contact {
 	private int id;
 	private String name;
@@ -11,14 +14,23 @@ public class Contact {
 		this.email = email;
 	}
 
+	/**
+	 * @return The contact ID
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @return The contact name
+	 */
 	public String getName(){
 		return name;
 	}
 
+	/**
+	 * @return The contact name
+	 */
 	public String toString(){
 		return name;
 	}

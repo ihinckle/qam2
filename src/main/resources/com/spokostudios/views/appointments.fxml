@@ -17,7 +17,7 @@
    <children>
       <TabPane tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Upcoming Week">
+          <Tab fx:id="weekTab" text="Week">
                <content>
                   <VBox>
                      <children>
@@ -35,27 +35,27 @@
                                         <PropertyValueFactory property="id" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="200.0" text="Title">
+                                <TableColumn fx:id="weekTitleColumn" minWidth="200.0" text="Title">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="title" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="200.0" text="Description">
+                                <TableColumn fx:id="weekDescriptionColumn" minWidth="200.0" text="Description">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="description" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="200.0" text="Location">
+                                <TableColumn fx:id="weekLocationColumn" minWidth="200.0" text="Location">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="location" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="200.0" text="Contact">
+                                <TableColumn fx:id="weekContactColumn" minWidth="200.0" text="Contact">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="contact" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="200.0" text="Type">
+                                <TableColumn fx:id="weekTypeColumn" minWidth="200.0" text="Type">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="type" />
                                     </cellValueFactory>
@@ -70,12 +70,12 @@
                                         <PropertyValueFactory property="end" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="100.0" prefWidth="100.0" text="Customer ID">
+                                <TableColumn fx:id="weekCustomerColumn" minWidth="100.0" prefWidth="100.0" text="Customer ID">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="customerId" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn minWidth="60.0" prefWidth="60.0" text="User ID">
+                                <TableColumn fx:id="weekUserColumn" minWidth="60.0" prefWidth="60.0" text="User ID">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="userId" />
                                     </cellValueFactory>
@@ -86,7 +86,7 @@
                   </VBox>
                </content>
             </Tab>
-          <Tab text="Month">
+          <Tab fx:id="monthTab" text="Month">
                <content>
                   <VBox>
                      <children>
@@ -104,39 +104,39 @@
                                       <PropertyValueFactory property="id" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="200.0" text="Title">
+                              <TableColumn fx:id="monthTitleColumn" minWidth="200.0" text="Title">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="title" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="200.0" text="Description">
+                              <TableColumn fx:id="monthDescriptionColumn" minWidth="200.0" text="Description">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="description" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="200.0" text="Location">
+                              <TableColumn fx:id="monthLocationColumn" minWidth="200.0" text="Location">
                                    <cellValueFactory>
                                        <PropertyValueFactory property="location" />
                                    </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="200.0" text="Contact">
+                              <TableColumn fx:id="monthContactColumn" minWidth="200.0" text="Contact">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="contact" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="200.0" text="Type">
+                              <TableColumn fx:id="monthTypeColumn" minWidth="200.0" text="Type">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="type" />
                                   </cellValueFactory>
                               </TableColumn>
                               <TableColumn fx:id="monthStartColumn" minWidth="300.0" text="Start" />
                               <TableColumn fx:id="monthEndColumn" minWidth="300.0" text="End" />
-                              <TableColumn minWidth="100.0" prefWidth="100.0" text="Customer ID">
+                              <TableColumn fx:id="monthCustomerColumn" minWidth="100.0" prefWidth="100.0" text="Customer ID">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="customerId" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="60.0" prefWidth="60.0" text="User ID">
+                              <TableColumn fx:id="monthUserColumn" minWidth="60.0" prefWidth="60.0" text="User ID">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="userId" />
                                   </cellValueFactory>
@@ -154,41 +154,41 @@
             <VBox>
                <children>
                   <Label fx:id="idLabel" text="ID:" />
-                  <Label text="Title" />
+                  <Label fx:id="titleLabel" text="Title" />
                   <TextField fx:id="titleField" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <Label text="Location" />
+                  <Label fx:id="locationLabel" text="Location" />
                   <TextField fx:id="locationField" />
-                  <Label text="Description" />
+                  <Label fx:id="descriptionLabel" text="Description" />
                   <TextField fx:id="descriptionField" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <Label text="Date" />
+                  <Label fx:id="dateLabel" text="Date" />
                   <DatePicker fx:id="dateField" />
-                  <Label text="Type" />
+                  <Label fx:id="typeLabel" text="Type" />
                   <TextField fx:id="typeField" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <Label text="Start" />
+                  <Label fx:id="startLabel" text="Start" />
                   <ComboBox fx:id="startTimeField" prefWidth="150.0" />
-                  <Label text="End" />
+                  <Label fx:id="endLabel" text="End" />
                   <ComboBox fx:id="endTimeField" prefWidth="150.0" />
                </children>
             </VBox>
             <VBox>
                <children>
-                  <Label text="Contact" />
+                  <Label fx:id="contactLabel" text="Contact" />
                   <ComboBox fx:id="contactField" prefWidth="150.0" />
-                  <Label text="Customer" />
+                  <Label fx:id="customerLabel" text="Customer" />
                   <ComboBox fx:id="customerField" prefWidth="150.0" />
-                  <Label text="User" />
+                  <Label fx:id="userLabel" text="User" />
                   <ComboBox fx:id="userField" prefWidth="150.0" />
                </children>
             </VBox>

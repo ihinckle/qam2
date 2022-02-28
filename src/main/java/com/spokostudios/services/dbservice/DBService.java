@@ -15,9 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+/**
+ * The database service to pull connection logic out of the controllers.
+ * It was orginally a singular monolith. With appoinments a new class
+ * was created to help create modularity.
+ */
 public class DBService {
-	private static User loggedUser;
-
 	private static DBService DBServiceInstance;
 	private static Connection connection;
 
@@ -28,6 +31,7 @@ public class DBService {
 	private static final String CONTACTSSTATEMENT = "SELECT Contact_ID, Contact_Name, Email FROM contacts";
 	private static final String TYPESCOUNTSTATEMENT = "SELECT Type,COUNT(*) count FROM appointments GROUP BY Type";
 	private static final String MONTHSCOUNTSTATEMENT = "SELECT DATE_FORMAT(Start, '%Y-%m') Month,COUNT(*) count FROM appointments GROUP BY Month";
+	private static final String CUSTOMERSBYLOCATIONSTATEMENT ="SELECT Division,COUNTRY_ID,COUNT(*) count FROM customers INNER JOIN first_level_divisions fld on customers.Division_ID = fld.Division_ID GROUP BY customers.Division_ID";
 
 	private static final String DIVISIONSSTATEMENT = "SELECT Division_ID, Division, COUNTRY_ID FROM first_level_divisions";
 	private static final String DIVISIONIDSTATEMENT = "SELECT Division_ID FROM first_level_divisions WHERE Division = ?";
@@ -45,6 +49,10 @@ public class DBService {
 		appointmentsService = new AppointmentsService(connection);
 	}
 
+	/**
+	 * @return The instance of this service
+	 * @throws SQLException
+	 */
 	public static DBService getInstance() throws SQLException {
 		if(DBServiceInstance == null){
 			DBServiceInstance = new DBService();
@@ -53,10 +61,21 @@ public class DBService {
 		return DBServiceInstance;
 	}
 
+	/**
+	 * Gets us the appointments service object in a more restful style
+	 * @return The appointment service object associated with this database service
+	 */
 	public AppointmentsService Appointments(){
 		return appointmentsService;
 	}
 
+	/**
+	 * Logs in the user
+	 * @param user The desired username to compare
+	 * @param password The desired password to compare
+	 * @return Whether or not a login should be allowed
+	 * @throws SQLException
+	 */
 	public boolean login(String user, String password) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(LOGINSTATEMENT);
 		statement.setString(1, user);
@@ -64,15 +83,17 @@ public class DBService {
 		ResultSet rs = statement.executeQuery();
 
 		if(rs.next()){
-			loggedUser = new User(rs.getInt("User_ID"),
-								  rs.getString("User_Name"));
-
 			return true;
 		}
 
 		return false;
 	}
 
+	/**
+	 * Gets the total number of appointments counted by the type of appoinment
+	 * @return A hashmap storing the type and how many
+	 * @throws SQLException
+	 */
 	public HashMap<String, Integer> getTotalByType() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(TYPESCOUNTSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -86,6 +107,11 @@ public class DBService {
 		return results;
 	}
 
+	/**
+	 * Gets the total number of appointments counted by the month the appointment is in
+	 * @return A hashmap of the month and how many
+	 * @throws SQLException
+	 */
 	public HashMap<String, Integer> getTotalByMonth() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(MONTHSCOUNTSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -99,6 +125,39 @@ public class DBService {
 		return results;
 	}
 
+	/**
+	 * Gets the total number of customers organized into the divisions that they live in.
+	 * Also includes the country for further organization.
+	 * @return
+	 * @throws SQLException
+	 */
+	public HashMap<Integer, HashMap> getCustomersTotalByLocation() throws SQLException {
+		PreparedStatement statement = connection.prepareStatement(CUSTOMERSBYLOCATIONSTATEMENT);
+		ResultSet rs = statement.executeQuery();
+
+		HashMap<Integer, HashMap> results = new HashMap<>();
+
+		while(rs.next()){
+			int countryID = rs.getInt("Country_ID");
+
+			if(results.containsKey(countryID)){
+				HashMap<String, Integer> locationCount = results.get(countryID);
+				locationCount.put(rs.getString("Division"), rs.getInt("count"));
+			}else{
+				results.put(countryID, new HashMap<String, Integer>());
+				HashMap<String, Integer> locationCount = results.get(countryID);
+				locationCount.put(rs.getString("Division"), rs.getInt("count"));
+			}
+		}
+
+		return results;
+	}
+
+	/**
+	 * Gets all customers
+	 * @return The list of customers
+	 * @throws SQLException
+	 */
 	public ObservableList<Customer> getCustomers() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(GETCUSTOMERSSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -119,6 +178,11 @@ public class DBService {
 		return customers;
 	}
 
+	/**
+	 * Add a customer
+	 * @param customer The desired customer information
+	 * @throws SQLException
+	 */
 	public void addCustomer(Customer customer) throws SQLException {
 		int divisionId;
 
@@ -138,6 +202,11 @@ public class DBService {
 		statement.executeUpdate();
 	}
 
+	/**
+	 * Updates a customer record
+	 * @param customer The ID of the existing record along with the desired changes
+	 * @throws SQLException
+	 */
 	public void updateCustomer(Customer customer) throws SQLException {
 		int divisionId;
 
@@ -157,14 +226,24 @@ public class DBService {
 		statement.executeUpdate();
 	}
 
+	/**
+	 * Deletes a customer
+	 * @param id The ID of the customer to remove
+	 * @throws SQLException
+	 */
 	public void deleteCustomer(int id) throws SQLException {
-		appointmentsService.deleteOfCustomer(id);
+		appointmentsService.deleteOfCustomer(id); // Remove all the appointments associated with the customer
 
 		PreparedStatement statement = connection.prepareStatement(DELETECUSTOMERSTATEMENT);
 		statement.setInt(1, id);
 		statement.executeUpdate();
 	}
 
+	/**
+	 * Gets all the countries
+	 * @return A list of countries
+	 * @throws SQLException
+	 */
 	public ObservableList<Country> getCountries() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(COUNTRIESSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -178,6 +257,11 @@ public class DBService {
 		return countries;
 	}
 
+	/**
+	 * Gets all the first level divisions
+	 * @return A list of divisions
+	 * @throws SQLException
+	 */
 	public ObservableList<Division> getDivisions() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(DIVISIONSSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -194,6 +278,11 @@ public class DBService {
 		return divisions;
 	}
 
+	/**
+	 * Gets all the contacts
+	 * @return A list of contacts
+	 * @throws SQLException
+	 */
 	public ObservableList<Contact> getContacts() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(CONTACTSSTATEMENT);
 		ResultSet rs = statement.executeQuery();
@@ -211,6 +300,11 @@ public class DBService {
 		return contacts;
 	}
 
+	/**
+	 * Gets all the users
+	 * @return A list of users
+	 * @throws SQLException
+	 */
 	public ObservableList<User> getUsers() throws SQLException {
 		PreparedStatement statement = connection.prepareStatement(GETUSERSSTATEMENT);
 		ResultSet rs = statement.executeQuery();

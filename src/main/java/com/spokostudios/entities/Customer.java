@@ -1,5 +1,8 @@
 package com.spokostudios.entities;
 
+/**
+ * A customer object
+ */
 public class Customer {
 	private int id;
 	private String name;
@@ -38,34 +41,58 @@ public class Customer {
 		this.name = name;
 	}
 
+	/**
+	 * @return The customer ID
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @return The customer name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return The customer address
+	 */
 	public String getAddress() {
 		return address;
 	}
 
+	/**
+	 * @return The customer postal code
+	 */
 	public String getPostalCode() {
 		return postalCode;
 	}
 
+	/**
+	 * @return The customer phone number
+	 */
 	public String getPhone() {
 		return phone;
 	}
 
+	/**
+	 * @return The local area the customer lives in
+	 */
 	public String getDivision() {
 		return division;
 	}
 
+	/**
+	 * @return The country the customer lives in
+	 */
 	public String getCountry() {
 		return country;
 	}
 
+	/**
+	 * @return The customer's ID and the customer's name
+	 */
 	public String toString(){
 		return id + ": " + name;
 	}

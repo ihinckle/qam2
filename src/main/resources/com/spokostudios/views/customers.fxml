@@ -19,32 +19,32 @@
                     <PropertyValueFactory property="id" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Customer Name">
+            <TableColumn fx:id="nameColumn" minWidth="200.0" text="Customer Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Address">
+            <TableColumn fx:id="addressColumn" minWidth="200.0" text="Address">
                 <cellValueFactory>
                     <PropertyValueFactory property="address" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Division">
+            <TableColumn fx:id="divisionColumn" minWidth="200.0" text="Division">
                 <cellValueFactory>
                     <PropertyValueFactory property="division" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Country">
+            <TableColumn fx:id="countryColumn" minWidth="200.0" text="Country">
                 <cellValueFactory>
                     <PropertyValueFactory property="country" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Postal Code">
+            <TableColumn fx:id="postalColumn" minWidth="200.0" text="Postal Code">
                 <cellValueFactory>
                     <PropertyValueFactory property="postalCode" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn minWidth="200.0" text="Phone">
+            <TableColumn fx:id="phoneColumn" minWidth="200.0" text="Phone">
                 <cellValueFactory>
                     <PropertyValueFactory property="phone" />
                 </cellValueFactory>
@@ -56,25 +56,25 @@
             <VBox prefHeight="200.0" prefWidth="300.0">
                <children>
                   <Label fx:id="idLabel" text="ID: " />
-                  <Label text="Name" />
+                  <Label fx:id="nameLabel" text="Name" />
                   <TextField fx:id="nameField" />
-                  <Label text="Address" />
+                  <Label fx:id="addressLabel" text="Address" />
                   <TextField fx:id="addressField" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Label text="Postal Code" />
+                  <Label fx:id="postalLabel" text="Postal Code" />
                   <TextField fx:id="postalField" />
-                  <Label text="Phone" />
+                  <Label fx:id="phoneLabel" text="Phone" />
                   <TextField fx:id="phoneField" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="300.0">
                <children>
-                  <Label text="Country" />
+                  <Label fx:id="countryLabel" text="Country" />
                   <ComboBox fx:id="countryDropdown" minWidth="300.0" />
-                  <Label text="Division" />
+                  <Label fx:id="divisionLabel" text="Division" />
                   <ComboBox fx:id="divisionDropdown" minWidth="300.0" />
                </children>
             </VBox>
@@ -82,7 +82,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addCustomerBtnClick" text="Add Customer" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addCustomerBtnClick" text="Create" />
             <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateCustomerBtnClick" text="Update" visible="false" />
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteCustomerBtnClick" text="Delete" visible="false" />
             <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearBtnClick" text="Clear Selection" visible="false" />
