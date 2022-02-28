@@ -2,8 +2,6 @@ package com.spokostudios.entities;
 
 import javafx.collections.ObservableList;
 
-import java.util.function.Predicate;
-
 public class Country {
 	private int id;
 	private String name;

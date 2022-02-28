@@ -3,15 +3,19 @@ package com.spokostudios.views;
 import com.spokostudios.entities.Country;
 import com.spokostudios.entities.Customer;
 import com.spokostudios.entities.Division;
-import com.spokostudios.services.DBService;
+import com.spokostudios.services.dbservice.DBService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 
@@ -19,8 +23,8 @@ public class CustomersController {
 	private DBService dbs;
 
 	@FXML private TableView customersTable;
-	@FXML private ChoiceBox<Division> divisionDropdown;
-	@FXML private ChoiceBox<Country> countryDropdown;
+	@FXML private ComboBox<Division> divisionDropdown;
+	@FXML private ComboBox<Country> countryDropdown;
 	@FXML private TextField nameField;
 	@FXML private TextField addressField;
 	@FXML private TextField postalField;
@@ -29,6 +33,7 @@ public class CustomersController {
 	@FXML private Button updateButton;
 	@FXML private Button deleteButton;
 	@FXML private Button clearButton;
+	@FXML private Label idLabel;
 
 	private ObservableList<Division> divisions;
 	private Customer selectedCustomer;
@@ -42,9 +47,8 @@ public class CustomersController {
 
 		countryDropdown.setItems(countries);
 		countryDropdown.setOnAction((ActionEvent event) ->{
-			ChoiceBox source = (ChoiceBox) event.getSource();
-
-			Country sourceValue = (Country) source.getValue();
+			ComboBox<Country> source = (ComboBox) event.getSource();
+			Country sourceValue = source.getValue();
 
 			if(sourceValue == null){
 				return;
@@ -58,10 +62,11 @@ public class CustomersController {
 		customersTable.setRowFactory(customersTable -> {
 			TableRow<Customer> row = new TableRow<>();
 
-			row.setOnMouseClicked(event -> {
+			row.setOnMouseClicked((MouseEvent event) -> {
 				TableRow<Customer> source = (TableRow<Customer>) event.getSource();
 				selectedCustomer = source.getItem();
 
+				idLabel.setText("ID: " + selectedCustomer.getId());
 				nameField.setText(selectedCustomer.getName());
 				addressField.setText(selectedCustomer.getAddress());
 				postalField.setText(selectedCustomer.getPostalCode());
@@ -108,14 +113,16 @@ public class CustomersController {
 
 		dbs.updateCustomer(customer);
 
-		reset();
+		clearBtnClick();
 	}
 
 	@FXML
 	private void deleteCustomerBtnClick() throws SQLException {
 		dbs.deleteCustomer(selectedCustomer.getId());
 
-		reset();
+		clearBtnClick();
+
+		new Alert(Alert.AlertType.CONFIRMATION, "Deleted " + selectedCustomer.getName(), ButtonType.CLOSE).show();
 	}
 
 	@FXML
@@ -135,10 +142,11 @@ public class CustomersController {
 	private void reset() throws SQLException {
 		populateTable();
 
-		nameField.setText("");
-		addressField.setText("");
-		postalField.setText("");
-		phoneField.setText("");
+		idLabel.setText("ID: ");
+		nameField.setText(null);
+		addressField.setText(null);
+		postalField.setText(null);
+		phoneField.setText(null);
 		countryDropdown.setValue(null);
 		divisionDropdown.setValue(null);
 	}

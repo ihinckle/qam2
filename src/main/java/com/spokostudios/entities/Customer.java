@@ -16,12 +16,8 @@ public class Customer {
 					String phone,
 					String division,
 					String country){
+		this(name,address,postalCode,phone,division);
 		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.postalCode = postalCode;
-		this.phone = phone;
-		this.division = division;
 		this.country = country;
 	}
 
@@ -35,6 +31,11 @@ public class Customer {
 		this.postalCode = postalCode;
 		this.phone = phone;
 		this.division = division;
+	}
+
+	public Customer(int id, String name){
+		this.id = id;
+		this.name = name;
 	}
 
 	public int getId() {
@@ -63,5 +64,9 @@ public class Customer {
 
 	public String getCountry() {
 		return country;
+	}
+
+	public String toString(){
+		return id + ": " + name;
 	}
 }

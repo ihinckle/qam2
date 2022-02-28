@@ -1,17 +1,32 @@
 package com.spokostudios.views;
 
-import com.spokostudios.App;
+import com.spokostudios.services.ViewsService;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
 public class DashboardController {
+	private ViewsService vs;
+
+	@FXML private HBox container;
 	@FXML private SubScene viewPane;
+
+	@FXML
+	private void initialize() throws IOException {
+		vs = ViewsService.getInstance();
+
+		viewPane.heightProperty().bind(container.heightProperty());
+		container.widthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+			viewPane.setWidth(container.getWidth()-200);
+		});
+
+		viewPane.setRoot(vs.loadFXML("home"));
+	}
 
 	@FXML
 	private void navigate(ActionEvent e) throws IOException {
@@ -26,13 +41,11 @@ public class DashboardController {
 			case "appointmentsButton":
 				template = "appointments";
 				break;
+			case "reportsButton":
+				template = "reports";
+				break;
 		}
 
-		viewPane.setRoot(loadFXML(template));
-	}
-
-	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/" + fxml + ".fxml"));
-		return fxmlLoader.load();
+		viewPane.setRoot(vs.loadFXML(template));
 	}
 }

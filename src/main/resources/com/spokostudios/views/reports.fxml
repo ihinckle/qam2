@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane minWidth="1440.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.spokostudios.views.ReportsController">
+  <tabs>
+    <Tab text="Appointment Counts">
+         <content>
+            <Label text="Label" />
+         </content>
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="typeBox">
+                     <children>
+                        <Label text="Appointment Count By Type" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="monthBox">
+                     <children>
+                        <Label text="Appointment Count By Month">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </content>
+    </Tab>
+    <Tab text="Contact Appointments">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Contact" />
+                        <ChoiceBox fx:id="reportContactField" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="appointmentTable" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                        <TableColumn minWidth="50.0" prefWidth="50.0" text="ID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="id" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn minWidth="200.0" text="Title">
+                          <cellValueFactory>
+                              <PropertyValueFactory property="title" />
+                          </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn minWidth="200.0" text="Type">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="type" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn minWidth="200.0" text="Description">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="description" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="startColumn" minWidth="200.0" text="Start" />
+                        <TableColumn fx:id="endColumn" minWidth="200.0" text="End" />
+                        <TableColumn minWidth="200.0" text="Customer ID">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="customerId" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+    </Tab>
+      <Tab text="Choice Report">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

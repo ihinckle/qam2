@@ -1,8 +1,8 @@
 package com.spokostudios.views;
 
 import com.spokostudios.App;
-import com.spokostudios.services.DBService;
 import com.spokostudios.services.LocalizationService;
+import com.spokostudios.services.dbservice.DBService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -74,6 +74,7 @@ public class LoginController {
 		if(!loginSuccessful){
 			errorBox.setVisible(true);
 			errorText.setText("User and/or Password are incorrect.");
+			return;
 		}
 
 		try{
