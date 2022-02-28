@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
+<record>
+  <date>2022-02-28T21:53:35.611637223Z</date>
+  <millis>1646085215611</millis>
+  <nanos>637223</nanos>
+  <sequence>0</sequence>
+  <logger>com.spokostudios.views.LoginController</logger>
+  <level>INFO</level>
+  <class>com.spokostudios.views.LoginController</class>
+  <method>login</method>
+  <thread>16</thread>
+  <message>Login attempt: admin | 2022-02-28T14:53:35.609737188 | Successful</message>
+</record>
 </log>

@@ -240,8 +240,8 @@ public class AppointmentsController {
         try {
             dbs.Appointments().delete(selectedAppointment.getId());
             clearSelection();
-
-            new Alert(Alert.AlertType.CONFIRMATION, "Deleted appointment ID:"+selectedAppointment.getId()+" Type: "+selectedAppointment.getType(), ButtonType.CLOSE).show();
+            String alertString = String.format(ls.getText("appointments.deletedMessage") ,selectedAppointment.getId(), selectedAppointment.getType());
+            new Alert(Alert.AlertType.CONFIRMATION, alertString, ButtonType.CLOSE).show();
         } catch (SQLException e) {
             dashboardController.displayError("appointments.deleteFailed");
             e.printStackTrace();

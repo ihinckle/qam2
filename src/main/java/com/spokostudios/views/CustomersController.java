@@ -197,7 +197,7 @@ public class CustomersController {
 			dbs.deleteCustomer(selectedCustomer.getId());
 			clearBtnClick();
 
-			new Alert(Alert.AlertType.CONFIRMATION, "Deleted " + selectedCustomer.getName(), ButtonType.CLOSE).show();
+			new Alert(Alert.AlertType.CONFIRMATION, ls.getText("customers.deleteMessage")+" " + selectedCustomer.getName(), ButtonType.CLOSE).show();
 		} catch (SQLException e) {
 			dashboardController.displayError("customers.failedDelete");
 			e.printStackTrace();

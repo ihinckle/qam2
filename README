@@ -4,8 +4,17 @@ The purpose of this application is to schedule customers with contacts and users
 
 Author: Isaac Hinckley | ihinckl@wgu.edu | QAM2 | February 28, 2022
 
-IDE: IntelliJ.2021.3.2 | openjdk.v17.0.1 | JavaFX.v17.0.1
+IDE: IntelliJ v2021.3.2 | openjdk v17.0.1 | JavaFX v17.0.1 | MySQL Connector v8.0.28
 
 To run the program:
 - Enter project root
--
+- Run command: ./apache-maven-3.8.4/bin/mvn javafx:run
+- Using the program:
+-- Login using valid credentials
+-- Customers, Appointments, and Reports pages
+-- Customers and Appointments have on the same screen methods of creating, updating, and deleting
+-- Click on a customer or appointment to pull the information into the form
+-- The information in the form can be discared
+
+My additional report was using a count of customers by location. Maybe in the future it could
+contribute to deciding where a new office should be opened.
