@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.spokostudios</groupId>
     <artifactId>qam2</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
@@ -42,13 +42,16 @@
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.6</version>
+                <configuration>
+                    <mainClass>com.spokostudios/com.spokostudios.App</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <!-- Default configuration for running -->
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.spokostudios.App</mainClass>
+                            <mainClass>com.spokostudios/com.spokostudios.App</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -59,7 +62,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=localhost:8080</option>
                             </options>
-                            <mainClass>com.spokostudios.App</mainClass>
+                            <mainClass>com.spokostudios/com.spokostudios.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>
