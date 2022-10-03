@@ -392,6 +392,10 @@ public class AppointmentsController {
 
             endTimeField.setItems(null);
 
+            if(option == null){
+                return;
+            }
+
             int timeInt = option.getTimeInt();
             ObservableList<TimeOption> endTimes = FXCollections.observableArrayList();
             for(int i=timeInt+1; i<=17; i++){

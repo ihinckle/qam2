@@ -92,7 +92,7 @@
                <children>
                   <VBox fx:id="usLocales">
                      <children>
-                        <Label text="Customers in the U.S." />
+                        <Label fx:id="usLabel" text="Customers in the U.S." />
                      </children>
                   </VBox>
                   <VBox fx:id="ukLocales">
@@ -100,7 +100,7 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                      <children>
-                        <Label text="Customers in the UK" />
+                        <Label fx:id="ukLabel" text="Customers in the UK" />
                      </children>
                   </VBox>
                   <VBox fx:id="canadaLocales">
@@ -108,7 +108,7 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                      <children>
-                        <Label text="Customers in Canada" />
+                        <Label fx:id="canadaLabel" text="Customers in Canada" />
                      </children>
                   </VBox>
                </children>

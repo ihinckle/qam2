@@ -2,15 +2,15 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-02-28T21:53:35.611637223Z</date>
-  <millis>1646085215611</millis>
-  <nanos>637223</nanos>
+  <date>2022-10-03T06:49:49.537718773Z</date>
+  <millis>1664779789537</millis>
+  <nanos>718773</nanos>
   <sequence>0</sequence>
   <logger>com.spokostudios.views.LoginController</logger>
   <level>INFO</level>
   <class>com.spokostudios.views.LoginController</class>
   <method>login</method>
   <thread>16</thread>
-  <message>Login attempt: admin | 2022-02-28T14:53:35.609737188 | Successful</message>
+  <message>Login attempt: admin | 2022-10-03T00:49:49.535650106 | Successful</message>
 </record>
 </log>
