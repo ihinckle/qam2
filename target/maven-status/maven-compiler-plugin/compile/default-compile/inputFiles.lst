@@ -12,6 +12,7 @@
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/entities/User.java
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/entities/Contact.java
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/entities/Appointment.java
+/home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/handlers/SimpleFileHandler.java
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/module-info.java
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/entities/Customer.java
 /home/isaachinckley/IdeaProjects/qam2/src/main/java/com/spokostudios/views/CustomersController.java

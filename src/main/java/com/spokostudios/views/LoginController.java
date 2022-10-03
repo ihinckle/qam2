@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class LoginController {
 	private LocalizationService ls;
@@ -49,7 +50,8 @@ public class LoginController {
 		logger.setLevel(Level.ALL);
 		FileHandler fh = null;
 		try {
-			fh = new FileHandler("login_activity.txt");
+			fh = new FileHandler("login_activity.txt", true);
+			fh.setFormatter(new SimpleFormatter());
 		} catch (IOException e) {
 			displayError("applicationError");
 			e.printStackTrace();

@@ -1,16 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE log SYSTEM "logger.dtd">
-<log>
-<record>
-  <date>2022-10-03T06:49:49.537718773Z</date>
-  <millis>1664779789537</millis>
-  <nanos>718773</nanos>
-  <sequence>0</sequence>
-  <logger>com.spokostudios.views.LoginController</logger>
-  <level>INFO</level>
-  <class>com.spokostudios.views.LoginController</class>
-  <method>login</method>
-  <thread>16</thread>
-  <message>Login attempt: admin | 2022-10-03T00:49:49.535650106 | Successful</message>
-</record>
 </log>
+Oct 03, 2022 1:14:20 AM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-10-03T01:14:20.230038727 | Successful
+Oct 03, 2022 1:15:05 AM com.spokostudios.views.LoginController login
+WARNING: Login attempt: admin | 2022-10-03T01:15:05.838957935 | Failed
