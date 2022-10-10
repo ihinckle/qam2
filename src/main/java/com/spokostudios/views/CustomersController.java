@@ -46,6 +46,11 @@ public class CustomersController {
 	private Customer selectedCustomer;
 	private DashboardController dashboardController = DashboardController.getInstance();
 
+	/**
+	 * Initializes the customers controller and fetches initial data.
+	 *
+	 * Uses lambdas in event handlers and to set up table row behavior.
+	 */
 	@FXML
 	private void initialize(){
 		try {

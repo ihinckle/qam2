@@ -25,6 +25,14 @@ public class LocalizationService {
 
 	private static ZoneId zoneId;
 
+	/**
+	 * Service for getting translations.
+	 *
+	 * Contains a lambda to easily map each row in the translation
+	 * file as a key value pair in a list.
+	 *
+	 * @throws Exception
+	 */
 	private LocalizationService() throws Exception {
 		locale = Locale.getDefault();
 		zoneId = ZoneId.systemDefault();

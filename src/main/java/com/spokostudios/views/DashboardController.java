@@ -28,6 +28,11 @@ public class DashboardController {
 	@FXML private VBox errorBox;
 	@FXML private TextArea errorLabel;
 
+	/**
+	 * Initializes the dashboard with data.
+	 *
+	 * Uses a lambda to set up a listener
+	 */
 	@FXML
 	private void initialize(){
 		instance = this;

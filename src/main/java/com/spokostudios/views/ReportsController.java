@@ -47,6 +47,12 @@ public class ReportsController {
 	@FXML private Label ukLabel;
 	@FXML private Label canadaLabel;
 
+	/**
+	 * Initialize the reports and prepare the data
+	 *
+	 * contains several lambdas dealing with foreach steps
+	 * and mapping data
+	 */
 	@FXML
 	private void initialize(){
 		try {

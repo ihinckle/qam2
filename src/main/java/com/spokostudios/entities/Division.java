@@ -42,14 +42,14 @@ public class Division {
 
 	/**
 	 * Gets a divsion from the desired name
+	 *
+	 * Uses a lambda to filter by a single division name
+	 *
 	 * @param divisions
 	 * @param name
 	 * @return A division
 	 */
 	public static Division filterDivisionByName(ObservableList<Division> divisions, String name){
-		/**
-		 * A very simple lambda to return a desired object
-		 */
 		return divisions.filtered(division -> division.getName().equals(name)).get(0);
 	}
 

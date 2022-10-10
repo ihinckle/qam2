@@ -279,6 +279,9 @@ public class AppointmentsController {
 
     /**
      * Sets up the mouse click action on a row
+     *
+     * Contains a lambda to keep the logic for setting up the row
+     * in the same location as the definition.
      */
     private void setTableRow(){
         weekTable.setRowFactory(weekTable -> {
@@ -375,6 +378,8 @@ public class AppointmentsController {
     /**
      * Sets up the time selection in the form. Will not allow an end time
      * to be selected until a start time has been chosen.
+     *
+     * Contains a lambda to set an event handler.
      */
     private void setTimeOptions(){
         ObservableList<TimeOption> startTimes = FXCollections.observableArrayList();

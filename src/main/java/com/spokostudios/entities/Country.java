@@ -31,7 +31,10 @@ public class Country {
 	}
 
 	/**
-	 * Gets a country from the desired name
+	 * Gets a country from the desired name.
+	 *
+	 * Uses a lambda to quickly filter by a single name.
+	 *
 	 * @param countries
 	 * @param name
 	 * @return A country
