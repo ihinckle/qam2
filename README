@@ -7,7 +7,7 @@ Author: Isaac Hinckley | ihinckl@wgu.edu | QAM2 | February 28, 2022
 IDE: IntelliJ v2021.3.2 | openjdk v17.0.1 | JavaFX v17.0.1 | MySQL Connector v8.0.28
 
 To run the program:
-- Enter project root: C:\Users\LabUser\IdeaProjects\qam2
+- Enter project root: C:\Users\LabUser\IdeaProjects\qam2 (If in Labclient)
 - Run command: .\apache-maven-3.8.4\bin\mvn javafx:run
 - Using the program:
 -- Login using valid credentials
