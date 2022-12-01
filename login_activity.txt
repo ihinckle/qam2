@@ -3,3 +3,23 @@ Oct 03, 2022 1:14:20 AM com.spokostudios.views.LoginController login
 INFO: Login attempt: admin | 2022-10-03T01:14:20.230038727 | Successful
 Oct 03, 2022 1:15:05 AM com.spokostudios.views.LoginController login
 WARNING: Login attempt: admin | 2022-10-03T01:15:05.838957935 | Failed
+Nov 30, 2022 8:48:00 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T20:48:00.051489405 | Successful
+Nov 30, 2022 8:49:46 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T20:49:46.157438558 | Successful
+Nov 30, 2022 8:53:12 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T20:53:12.859377019 | Successful
+Nov 30, 2022 9:04:57 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:04:57.073694884 | Successful
+Nov 30, 2022 9:36:12 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:36:12.906894849 | Successful
+Nov 30, 2022 9:43:11 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:43:11.345270516 | Successful
+Nov 30, 2022 9:43:58 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:43:58.005400908 | Successful
+Nov 30, 2022 9:48:08 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:48:08.900599695 | Successful
+Nov 30, 2022 9:53:09 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T21:53:09.112214824 | Successful
+Nov 30, 2022 10:06:25 PM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-11-30T22:06:25.359503792 | Successful

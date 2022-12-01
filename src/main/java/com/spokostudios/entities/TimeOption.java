@@ -31,6 +31,24 @@ public class TimeOption {
 		timeInUTC = offsetTime.withOffsetSameInstant(ZoneOffset.UTC);
 	}
 
+	public TimeOption(int time, boolean fromUTC){
+
+		LocalizationService ls = null;
+		try {
+			ls = LocalizationService.getInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		timeInUTC = OffsetTime.of(time, 0, 0, 0, ZoneOffset.UTC);
+
+		timeObject = timeInUTC.withOffsetSameInstant(ls.getZoneOffset()).toLocalTime();
+
+		OffsetTime homeOfficeTime = timeInUTC.withOffsetSameInstant(ls.getHomeOfficeOffset());
+
+		this.time = homeOfficeTime.getHour();
+	}
+
 	/**
 	 * Gets the integer used to generate the TimeOption
 	 * @return The integer used to generate the TimeOption
