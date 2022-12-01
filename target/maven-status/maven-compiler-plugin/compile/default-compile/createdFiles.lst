@@ -4,7 +4,6 @@ com/spokostudios/entities/User.class
 com/spokostudios/views/AppointmentsController$3.class
 com/spokostudios/entities/Appointment.class
 module-info.class
-com/spokostudios/handlers/SimpleFileHandler.class
 com/spokostudios/views/HomeController.class
 com/spokostudios/entities/Country.class
 com/spokostudios/entities/Contact.class

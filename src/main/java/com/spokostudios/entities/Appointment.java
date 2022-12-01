@@ -114,7 +114,7 @@ public class Appointment {
      * @return The start time represented as a TimeOption
      */
     public TimeOption getStartTimeOption(){
-        return new TimeOption(getStartInUTC().getHour());
+        return new TimeOption(getStartInUTC().getHour(), true);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Appointment {
      * @return The end time represented as a TimeOption
      */
     public TimeOption getEndTimeOption(){
-        return new TimeOption(getEndInUTC().getHour());
+        return new TimeOption(getEndInUTC().getHour(), true);
     }
 
     /**
