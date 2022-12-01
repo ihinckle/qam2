@@ -226,7 +226,7 @@ public class AppointmentsController {
             dbs.Appointments().update(appointment);
             clearSelection();
         } catch (Exception e) {
-            dashboardController.displayError("appointments.updateFailed");
+            dashboardController.displayError("appointments.updateConflict");
             e.printStackTrace();
         }
     }
