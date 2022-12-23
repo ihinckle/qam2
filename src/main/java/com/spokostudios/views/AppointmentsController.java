@@ -383,7 +383,7 @@ public class AppointmentsController {
      */
     private void setTimeOptions(){
         ObservableList<TimeOption> startTimes = FXCollections.observableArrayList();
-        for(int i=8; i<17; i++){
+        for(int i=8; i<22; i++){
             startTimes.add(new TimeOption(i));
         }
         startTimeField.setItems(startTimes);
