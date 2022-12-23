@@ -239,9 +239,9 @@ public class AppointmentsController {
     void delete(){
         try {
             dbs.Appointments().delete(selectedAppointment.getId());
-            clearSelection();
             String alertString = String.format(ls.getText("appointments.deletedMessage") ,selectedAppointment.getId(), selectedAppointment.getType());
             new Alert(Alert.AlertType.CONFIRMATION, alertString, ButtonType.CLOSE).show();
+            clearSelection();
         } catch (SQLException e) {
             dashboardController.displayError("appointments.deleteFailed");
             e.printStackTrace();
@@ -403,7 +403,7 @@ public class AppointmentsController {
 
             int timeInt = option.getTimeInt();
             ObservableList<TimeOption> endTimes = FXCollections.observableArrayList();
-            for(int i=timeInt+1; i<=17; i++){
+            for(int i=timeInt+1; i<=22; i++){
                 endTimes.add(new TimeOption(i));
             }
             endTimeField.setItems(endTimes);

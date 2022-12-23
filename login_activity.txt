@@ -23,3 +23,11 @@ Nov 30, 2022 9:53:09 PM com.spokostudios.views.LoginController login
 INFO: Login attempt: admin | 2022-11-30T21:53:09.112214824 | Successful
 Nov 30, 2022 10:06:25 PM com.spokostudios.views.LoginController login
 INFO: Login attempt: admin | 2022-11-30T22:06:25.359503792 | Successful
+Dec 23, 2022 1:03:49 AM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-12-23T01:03:49.093762085 | Successful
+Dec 23, 2022 1:05:55 AM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-12-23T01:05:55.495863496 | Successful
+Dec 23, 2022 1:08:09 AM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-12-23T01:08:09.533755765 | Successful
+Dec 23, 2022 1:12:25 AM com.spokostudios.views.LoginController login
+INFO: Login attempt: admin | 2022-12-23T01:12:25.620248198 | Successful
